@@ -26,4 +26,4 @@ import { ProdService } from './data/services/prod.service';
   controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {};

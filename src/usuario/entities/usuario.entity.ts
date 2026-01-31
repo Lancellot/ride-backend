@@ -42,6 +42,11 @@ export class Usuario {
   @ApiProperty()
   sexo: string;
 
+  @IsNotEmpty()
+  @Column({ length: 50, nullable: false })
+  @ApiProperty()
+  tipoUsuario: string;
+
   @CreateDateColumn()
   @ApiProperty()
   data: Date;
