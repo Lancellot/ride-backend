@@ -11,7 +11,6 @@ import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { ProdService } from './data/services/prod.service';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -27,4 +26,4 @@ import { ProdService } from './data/services/prod.service';
   controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {};
