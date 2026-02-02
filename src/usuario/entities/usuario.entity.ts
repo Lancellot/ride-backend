@@ -36,9 +36,9 @@ export class Usuario {
   @ApiProperty()
   foto: string;
 
-  @MaxLength(1)
+  @MaxLength(100)
   @IsNotEmpty()
-  @Column({ length: 1, nullable: false })
+  @Column({ length: 100, nullable: false })
   @ApiProperty()
   sexo: string;
 
