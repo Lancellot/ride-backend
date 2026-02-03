@@ -11,12 +11,15 @@ export class ProdutoService {
   ) {}
 
   async findAll(): Promise<Produto[]> {
-    return await this.produtoRepository.find();
+    return await this.produtoRepository.find({ 
+      relations: ['categoria']
+    });
   }
 
   async findById(id: number): Promise<Produto> {
     const produto = await this.produtoRepository.findOne({
       where: { id },
+      relations: ['categoria'],
     });
 
     if (!produto) {
@@ -27,13 +30,14 @@ export class ProdutoService {
   }
 
   async create(produto: Produto): Promise<Produto> {
-    return this.produtoRepository.save(produto);
+    const novoProduto = await this.produtoRepository.save(produto);
+    return await this.findById(novoProduto.id);
   }
 
   async update(produto: Produto): Promise<Produto> {
     await this.findById(produto.id);
-
-    return this.produtoRepository.save(produto);
+    await this.produtoRepository.save(produto);
+    return await this.findById(produto.id);
   }
 
   async delete(id: number): Promise<DeleteResult> {
@@ -45,17 +49,13 @@ export class ProdutoService {
     const viagem = await this.findById(id);
     const tempo = viagem.distanciaKm / viagem.velocidadeMediaKmh;
     const minutos = tempo * 60;
-
     return Math.round(minutos);
   }
 
   async mudarTipoViagem(id: number): Promise<boolean> {
     const viagem = await this.findById(id);
-
     viagem.motoristaMesmoGenero = !viagem.motoristaMesmoGenero;
-
     await this.produtoRepository.save(viagem);
-
     return viagem.motoristaMesmoGenero;
   }
 }

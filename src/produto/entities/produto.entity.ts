@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 import { Categoria } from '../../categoria/entities/categoria.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -62,15 +62,17 @@ export class Produto {
   @ApiProperty()
   motoristaMesmoGenero: boolean;
 
-  @ApiProperty({type: () => Categoria})
+  @ApiProperty({ type: () => Categoria })
   @ManyToOne(() => Categoria, (categoria) => categoria.produto, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'categoriaId' })
   categoria: Categoria;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Usuario })
   @ManyToOne(() => Usuario, (usuario) => usuario.produto, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'usuarioId' })
   usuario: Usuario;
 }
