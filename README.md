@@ -130,7 +130,8 @@ JWT_SECRET=sua_chave_secreta
 
 ## 📷 Screenshots
 
-> *(adicione imagens do Swagger, Postman ou testes rodando)*
+> *(<img width="718" height="843" alt="image" src="https://github.com/user-attachments/assets/b7d85662-ac6a-4669-9679-26127f020e0a" />
+
 
 ---
 
